@@ -134,8 +134,18 @@ To configure your Maven build to support reproducible builds follow [official gu
 
 If your project has `project.build.outputTimestamp` property this plugin will update its value whenever the versions are updated. 
 
-This can be disabled by setting the configuration parameter `updateOutputTimestamp` to `false`.
-
+This can be disabled by setting the configuration parameter `updateOutputTimestamp` to `false`. The `versions-maven-plugin`, which is used to update the version numbers in the `pom.xml`-files,
+also changes the `project.build.outputTimestamp` property by [default](https://www.mojohaus.org/versions/versions-maven-plugin/set-mojo.html#updateBuildOutputTimestampPolicy).
+To change this behaviour, the `versions-maven-plugin` plugin has to be configured to the policy `never`:
+```
+<plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>versions-maven-plugin</artifactId>
+    <configuration>
+        <updateBuildOutputTimestampPolicy>never</updateBuildOutputTimestampPolicy>
+    </configuration>
+</plugin>
+```
 
 # Plugin Common Parameters
 
